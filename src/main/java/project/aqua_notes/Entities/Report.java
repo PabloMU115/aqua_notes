@@ -26,6 +26,12 @@ public class Report {
     @Column(nullable = false)
     private String reportDescription;
 
+    @Column(nullable = false)
+    private boolean active;
+
+    @Column(nullable = false)
+    private boolean visible;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

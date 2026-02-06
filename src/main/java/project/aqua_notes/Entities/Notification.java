@@ -14,7 +14,7 @@ public class Notification {
 
     private Long userFK;
 
-    private int notiftype;
+    private int notifType;
 
-    private String notifdescription;
+    private String notifDescription;
 }
