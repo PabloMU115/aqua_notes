@@ -3,30 +3,41 @@ package project.aqua_notes.Entities;
 import java.time.Instant;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "comments")
+@EntityListeners(AuditingEntityListener.class)
+@Table(
+  name = "comments",
+  indexes = {
+    @Index(name = "idx_comments_post", columnList = "post_id"),
+    @Index(name = "idx_comments_user", columnList = "user_id"),
+    @Index(name = "idx_comments_post_visible_created", columnList = "post_id, visible, created_at")
+  }
+)
 public class Comment {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long commId;
+    private Long commentId;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
@@ -38,5 +49,8 @@ public class Comment {
     private Instant createdAt;
 
     @Column(nullable = false)
-    private boolean modifies = false;
+    private boolean modified = false;
+
+    @Column(nullable = false)
+    private boolean visible = true;
 }
