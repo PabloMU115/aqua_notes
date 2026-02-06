@@ -27,10 +27,10 @@ public class Report {
     private String reportDescription;
 
     @Column(nullable = false)
-    private boolean active;
+    private boolean active = true;
 
     @Column(nullable = false)
-    private boolean visible;
+    private boolean visible = true;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
