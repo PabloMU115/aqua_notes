@@ -1,8 +1,9 @@
 package project.aqua_notes.Repositories;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class UserRepository {
-    
+import project.aqua_notes.Entities.UserEntity;
+
+public interface UserRepository extends JpaRepository<UserEntity, Long>{
+
 }
