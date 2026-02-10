@@ -1,4 +1,4 @@
-package project.aqua_notes.Models;
+package project.aqua_notes.Models.RoleDTOs;
 
 public class RoleDTO {
     public Long roleId;

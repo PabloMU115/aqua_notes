@@ -8,10 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "posts")
-public class Post {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PostEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +25,7 @@ public class Post {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "report_id", nullable = false, unique = true)
-    private Report report;
+    private ReportEntity report;
 
     //this structure leaves the door open to add more things
     //to the posts down the line

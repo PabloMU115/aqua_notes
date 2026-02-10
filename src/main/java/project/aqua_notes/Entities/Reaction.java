@@ -33,7 +33,7 @@ public class Reaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)
-    private Post post;
+    private PostEntity post;
 
     @Column(nullable = false)
     private int reactionType;
