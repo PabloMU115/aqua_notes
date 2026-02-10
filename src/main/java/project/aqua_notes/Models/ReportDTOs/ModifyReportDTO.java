@@ -4,6 +4,7 @@ public class ModifyReportDTO {
     private int reportType;
     private String reportTown;
     private String reportDescription;
+    private String coordinates;
 
     public int getReportType() {
         return reportType;
@@ -28,5 +29,14 @@ public class ModifyReportDTO {
     public void setReportDescription(String reportDescription) {
         this.reportDescription = reportDescription;
     }
+
+    public String getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
+    }
+
 
 }

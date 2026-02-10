@@ -28,6 +28,9 @@ public class ReportEntity {
 
     @Column(nullable = false, length = 100)
     private String reportTown;
+    
+    @Column(nullable = false, length = 100)
+    private String coordinates;
 
     @Column(nullable = false)
     private String reportDescription;

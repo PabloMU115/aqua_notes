@@ -52,6 +52,7 @@ public class ReportService {
         report.setReportTown(dto.getReportTown());
         report.setReportType(dto.getReportType());
         report.setReportDescription(dto.getReportDescription());
+        report.setCoordinates(dto.getCoordinates());
 
         repo.save(report);
 
