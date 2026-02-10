@@ -16,6 +16,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     //Users
+                    "/api/users/",
                     "/api/users/add",
                     "/api/users/getById/**",
                     "/api/users/modifyInfo/**",
@@ -23,7 +24,11 @@ public class SecurityConfig {
                     "/api/users/modifyPassword/**",
                     "/api/users/delete/**",
                     //Reports
-                    "/api/reports/add"
+                    "/api/reports/",
+                    "/api/reports/add",
+                    "/api/reports/modify/**",
+                    "/api/reports/delete/**",
+                    "/api/reports/changeActivity/**"
                 ).permitAll()
                 .anyRequest().authenticated()
             );

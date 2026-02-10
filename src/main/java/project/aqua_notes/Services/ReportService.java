@@ -8,6 +8,7 @@ import project.aqua_notes.Entities.PostEntity;
 import project.aqua_notes.Entities.ReportEntity;
 import project.aqua_notes.Entities.UserEntity;
 import project.aqua_notes.Models.ReportDTOs.AddReportDTO;
+import project.aqua_notes.Models.ReportDTOs.ModifyReportDTO;
 import project.aqua_notes.Repositories.PostRepository;
 import project.aqua_notes.Repositories.ReportRepository;
 import project.aqua_notes.Repositories.UserRepository;
@@ -43,5 +44,35 @@ public class ReportService {
         repo.save(newReport);
         postRepo.save(newPost);
         return newReport;
+    }
+
+    public ReportEntity modify(Long id, ModifyReportDTO dto){
+        ReportEntity report = repo.findById(id).orElseThrow();
+
+        report.setReportTown(dto.getReportTown());
+        report.setReportType(dto.getReportType());
+        report.setReportDescription(dto.getReportDescription());
+
+        repo.save(report);
+
+        return report;
+    }
+
+    public ReportEntity changeActivity(Long id){
+        ReportEntity report = repo.findById(id).orElseThrow();
+        if(report.isActive()){
+            report.setActive(false);
+        }else{
+            report.setActive(true);
+        }
+        repo.save(report);
+        return report;
+    }
+
+    public boolean delete(Long id){
+        ReportEntity report = repo.findById(id).orElseThrow();
+        report.setVisible(false);
+        repo.save(report);
+        return false;
     }
 }
