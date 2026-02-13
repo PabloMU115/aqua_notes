@@ -35,6 +35,10 @@ public class SecurityConfig {
                     "/api/reactions/get/**",
                     "/api/reactions/modify/**",
                     "/api/reactions/delete/**"
+                    //Comments
+
+                    //Notifications
+                    
                 ).permitAll()
                 .anyRequest().authenticated()
             );

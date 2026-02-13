@@ -29,6 +29,10 @@ public class ReportService {
         return repo.findAll();
     }
 
+    public ReportEntity getById(Long id){
+        return repo.findById(id).orElseThrow();
+    }
+
     public ReportEntity add(AddReportDTO incomingReport){
         ReportEntity newReport = new ReportEntity();
         UserEntity newUser = userRepo.findById(incomingReport.getUserId()).orElseThrow();
@@ -47,7 +51,7 @@ public class ReportService {
     }
 
     public ReportEntity modify(Long id, ModifyReportDTO dto){
-        ReportEntity report = repo.findById(id).orElseThrow();
+        ReportEntity report = getById(id);
 
         report.setReportTown(dto.getReportTown());
         report.setReportType(dto.getReportType());

@@ -16,6 +16,9 @@ import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -27,7 +30,10 @@ import jakarta.persistence.Table;
     @Index(name = "idx_comments_post_visible_created", columnList = "post_id, visible, created_at")
   }
 )
-public class Comment {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CommentEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

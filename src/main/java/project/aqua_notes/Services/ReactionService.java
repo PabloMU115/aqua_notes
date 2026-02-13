@@ -26,7 +26,7 @@ public class ReactionService {
         return repo.findAll();
     }
 
-    public ReactionEntity get(Long id){
+    public ReactionEntity getById(Long id){
         return repo.findById(id).orElseThrow();
     }
 
@@ -46,7 +46,7 @@ public class ReactionService {
     }
 
     public ReactionEntity modify(Long id, int type){
-        var reaction = repo.findById(id).orElseThrow();
+        var reaction = getById(id);
 
         reaction.setReactionType(type);
 
