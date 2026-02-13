@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import project.aqua_notes.Entities.CommentEntity;
 import project.aqua_notes.Models.CommentDTOs.AddCommentDTO;
+import project.aqua_notes.Models.CommentDTOs.ModifyCommentDTO;
 import project.aqua_notes.Repositories.CommentRepository;
 import project.aqua_notes.Repositories.PostRepository;
 import project.aqua_notes.Repositories.UserRepository;
@@ -44,20 +45,21 @@ public class CommentService {
         return repo.save(newComment);
     }
 
-    public CommentEntity modify(Long id, String content){
+    public CommentEntity modify(Long id, ModifyCommentDTO dto){
         var comment = getById(id);
 
-        comment.setContent(content);
+        comment.setContent(dto.getContent());
+        comment.setModified(true);
 
         repo.save(comment);
 
         return comment;
     }
 
-    public Boolean delete(Long id){
-        repo.deleteById(id);
-
-        return true;
+    public CommentEntity delete(Long id){
+        var comment = getById(id);
+        comment.setVisible(false);
+        return repo.save(comment);
     }
 
 
