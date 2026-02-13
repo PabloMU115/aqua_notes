@@ -28,8 +28,9 @@ public class SecurityConfig {
                     //Reactions
                     "/api/reactions/**",
                     //Comments
-                    "/api/comments/**"
+                    "/api/comments/**",
                     //Notifications
+                    "/api/notifications/**"
                     
                 ).permitAll()
                 .anyRequest().authenticated()
