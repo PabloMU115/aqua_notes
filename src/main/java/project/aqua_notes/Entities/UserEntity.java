@@ -51,5 +51,8 @@ public class UserEntity {
     @Column(nullable = false, length = 255)
     private String passwordHash;
 
+    @Column(nullable = false)
+    private boolean visible = true;
+
     
 }

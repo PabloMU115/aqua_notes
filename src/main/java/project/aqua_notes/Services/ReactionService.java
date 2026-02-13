@@ -56,12 +56,6 @@ public class ReactionService {
     }
 
     public boolean delete(Long id){
-        var item = repo.findById(id);
-
-        if(item.isEmpty()){
-            return false;
-        }
-
         repo.deleteById(id);
 
         return true;

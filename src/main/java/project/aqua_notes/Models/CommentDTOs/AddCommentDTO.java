@@ -1,6 +1,6 @@
 package project.aqua_notes.Models.CommentDTOs;
 
-public class AddEntityDTO {
+public class AddCommentDTO {
     private Long userId, postId;
     private String content;
 
@@ -27,6 +27,4 @@ public class AddEntityDTO {
     public void setContent(String content) {
         this.content = content;
     }
-
-
 }

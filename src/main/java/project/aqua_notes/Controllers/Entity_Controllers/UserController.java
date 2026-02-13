@@ -1,5 +1,7 @@
 package project.aqua_notes.Controllers.Entity_Controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +41,11 @@ public class UserController {
     public ResponseEntity<UserEntity> getById(@PathVariable Long id) {
         UserEntity user = userService.getUserById(id);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<UserEntity>> getById() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/modifyInfo/{id}")

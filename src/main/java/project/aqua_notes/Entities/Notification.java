@@ -37,7 +37,7 @@ public class Notification {
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
 
     @Column(nullable = false)
     private boolean checked = false;

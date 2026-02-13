@@ -41,6 +41,7 @@ public class ReportService {
         newReport.setReportType(incomingReport.getReportType());
         newReport.setReportTown(incomingReport.getReportTown());
         newReport.setReportDescription(incomingReport.getReportDescription());
+        newReport.setCoordinates(incomingReport.getCoordinates());
         newReport.setUser(newUser);
 
         newPost.setReport(newReport);

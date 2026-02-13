@@ -50,7 +50,7 @@ public class ReportEntity {
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

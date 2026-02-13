@@ -4,6 +4,7 @@ public class AddReportDTO {
     private int reportType;
     private String reportTown;
     private String reportDescription;
+    private String coordinates;
     private Long userId;
 
     public int getReportType() {
@@ -36,6 +37,14 @@ public class AddReportDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
     }
 
 

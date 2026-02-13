@@ -16,10 +16,6 @@ import project.aqua_notes.Entities.ReactionEntity;
 import project.aqua_notes.Models.ReactionDTOs.AddReactionDTO;
 import project.aqua_notes.Services.ReactionService;
 
-
-
-
-
 @RestController
 @RequestMapping("/api/reactions")
 public class ReactionController {
@@ -41,7 +37,7 @@ public class ReactionController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<ReactionEntity> getMethodName(@PathVariable Long id) {
-        return ResponseEntity.status(201).body(service.get(id));
+        return ResponseEntity.status(201).body(service.getById(id));
     }
     
     @PutMapping("/modify/{id}/{type}")

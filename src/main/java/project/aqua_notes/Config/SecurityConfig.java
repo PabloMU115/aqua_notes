@@ -16,27 +16,19 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     //Users
-                    "/api/users/",
-                    "/api/users/add",
-                    "/api/users/getById/**",
-                    "/api/users/modifyInfo/**",
-                    "/api/users/modifyMail/**",
-                    "/api/users/modifyPassword/**",
-                    "/api/users/delete/**",
+                    "/api/users/**",
+                    // "/api/users/add",
+                    // "/api/users/getById/**",
+                    // "/api/users/modifyInfo/**",
+                    // "/api/users/modifyMail/**",
+                    // "/api/users/modifyPassword/**",
+                    // "/api/users/delete/**",
                     //Reports
-                    "/api/reports/",
-                    "/api/reports/add",
-                    "/api/reports/modify/**",
-                    "/api/reports/delete/**",
-                    "/api/reports/changeActivity/**",
+                    "/api/reports/**",
                     //Reactions
-                    "/api/reactions/",
-                    "/api/reactions/add",
-                    "/api/reactions/get/**",
-                    "/api/reactions/modify/**",
-                    "/api/reactions/delete/**"
+                    "/api/reactions/**",
                     //Comments
-
+                    "/api/comments/**"
                     //Notifications
                     
                 ).permitAll()

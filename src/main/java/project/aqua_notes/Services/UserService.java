@@ -1,5 +1,7 @@
 package project.aqua_notes.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -55,6 +57,10 @@ public class UserService {
             );
     }
 
+    public List<UserEntity> getAllUsers() {
+        return userRepo.findAll();
+    }
+
     public UserEntity modifyUserInfo(ModifyUserDTO user, long id){
         var oldUser = userRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -87,10 +93,7 @@ public class UserService {
     }
 
     public boolean deleteUser(Long id){
-        if(userRepo.findById(id).isPresent()){
-            userRepo.deleteById(id);
-            return true;
-        }
+        userRepo.deleteById(id);
         return false;
     }
 }

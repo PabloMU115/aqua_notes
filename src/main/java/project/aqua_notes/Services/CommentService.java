@@ -2,12 +2,15 @@ package project.aqua_notes.Services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import project.aqua_notes.Entities.CommentEntity;
-import project.aqua_notes.Models.CommentDTOs.AddEntityDTO;
+import project.aqua_notes.Models.CommentDTOs.AddCommentDTO;
 import project.aqua_notes.Repositories.CommentRepository;
 import project.aqua_notes.Repositories.PostRepository;
 import project.aqua_notes.Repositories.UserRepository;
 
+@Service
 public class CommentService {
 
     private final CommentRepository repo;
@@ -28,7 +31,7 @@ public class CommentService {
         return repo.findById(id).orElseThrow();
     }
 
-    public CommentEntity add(AddEntityDTO dto){
+    public CommentEntity add(AddCommentDTO dto){
         var user = userRepo.findById(dto.getUserId()).orElseThrow();
         var post = postRepo.findById(dto.getPostId()).orElseThrow();
 
@@ -38,9 +41,7 @@ public class CommentService {
         newComment.setPost(post);
         newComment.setContent(dto.getContent());
 
-        repo.save(newComment);
-
-        return newComment;
+        return repo.save(newComment);
     }
 
     public CommentEntity modify(Long id, String content){
@@ -51,6 +52,12 @@ public class CommentService {
         repo.save(comment);
 
         return comment;
+    }
+
+    public Boolean delete(Long id){
+        repo.deleteById(id);
+
+        return true;
     }
 
 
