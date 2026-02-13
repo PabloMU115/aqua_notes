@@ -28,7 +28,13 @@ public class SecurityConfig {
                     "/api/reports/add",
                     "/api/reports/modify/**",
                     "/api/reports/delete/**",
-                    "/api/reports/changeActivity/**"
+                    "/api/reports/changeActivity/**",
+                    //Reactions
+                    "/api/reactions/",
+                    "/api/reactions/add",
+                    "/api/reactions/get/**",
+                    "/api/reactions/modify/**",
+                    "/api/reactions/delete/**"
                 ).permitAll()
                 .anyRequest().authenticated()
             );
