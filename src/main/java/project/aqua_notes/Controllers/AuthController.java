@@ -1,11 +1,16 @@
 package project.aqua_notes.Controllers;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +54,7 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
-    // OPTIONAL
+    // Turn this into a DTO later
     public record RegisterRequest(String userName, String userMail, String password) {}
 
     @PostMapping("/register")
@@ -71,5 +76,15 @@ public class AuthController {
 
         userRepo.save(u);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/me")
+    public Map<String, Object> me(@AuthenticationPrincipal Jwt jwt) {
+    return Map.of(
+        "sub", jwt.getSubject(),
+        "roles", jwt.getClaimAsStringList("roles"),
+        "iss", jwt.getClaimAsString("iss"),
+        "exp", jwt.getExpiresAt()
+    );
     }
 }

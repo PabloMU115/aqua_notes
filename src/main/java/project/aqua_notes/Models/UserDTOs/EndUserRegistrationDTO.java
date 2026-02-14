@@ -1,19 +1,8 @@
 package project.aqua_notes.Models.UserDTOs;
 
-public class ModifyUserDTO implements Cloneable{
+public class EndUserRegistrationDTO implements Cloneable{
     public String userName, userCountry, 
     userProvince, userCity, userPhone;
-
-    //#region Constructor
-    public ModifyUserDTO(String userName, String userMail, String userCountry, String userProvince,
-            String userCity, String userPhone, String passwordHash, Long roleId, Boolean verified) {
-        this.userName = userName;
-        this.userCountry = userCountry;
-        this.userProvince = userProvince;
-        this.userCity = userCity;
-        this.userPhone = userPhone;
-    }
-    //#endregion
 
     //#region Setters & Getters
     public String getUserName() {

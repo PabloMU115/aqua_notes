@@ -20,9 +20,9 @@ public class ModifyUserMailDTO implements Cloneable{
     //#endregion
     
     @Override
-    public CreateUserDTO clone(){
+    public EndUserRegistrationDTO clone(){
         try{
-            return (CreateUserDTO) super.clone();
+            return (EndUserRegistrationDTO) super.clone();
         }
         catch(CloneNotSupportedException error){
             throw new AssertionError();

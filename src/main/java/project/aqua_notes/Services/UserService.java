@@ -9,13 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import project.aqua_notes.Entities.RoleEntity;
 import project.aqua_notes.Entities.UserEntity;
-import project.aqua_notes.Models.UserDTOs.CreateUserDTO;
+import project.aqua_notes.Models.UserDTOs.EndUserRegistrationDTO;
 import project.aqua_notes.Models.UserDTOs.ModifyUserDTO;
 import project.aqua_notes.Models.UserDTOs.ModifyUserMailDTO;
 import project.aqua_notes.Models.UserDTOs.ModifyUserPasswordDTO;
-import project.aqua_notes.Repositories.RoleRepository;
 import project.aqua_notes.Repositories.UserRepository;
 
 @Service
@@ -23,27 +21,22 @@ public class UserService {
 
     @Autowired
     private final UserRepository userRepo;
-    private final RoleRepository roleRepo;
+
     public PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public UserService(UserRepository userRepo, RoleRepository roleRepo)
+    public UserService(UserRepository userRepo)
     {
         this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
     }
 
-    public UserEntity addUser(CreateUserDTO user) {
-        RoleEntity role = roleRepo.findById(user.getRoleId()).orElseThrow();
+    public UserEntity addUser(EndUserRegistrationDTO user) {
         UserEntity newUser = new UserEntity();
 
         newUser.setUserCity(user.getUserCity());
         newUser.setUserCountry(user.getUserCountry());
-        newUser.setUserMail(user.getUserMail());
         newUser.setUserPhone(user.getUserPhone());
         newUser.setUserName(user.getUserName());
         newUser.setUserProvince(user.getUserProvince());
-        newUser.setPasswordHash(encoder.encode(user.getPasswordHash()));
-        newUser.setRole(role);
 
         userRepo.save(newUser);
 

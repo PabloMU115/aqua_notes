@@ -3,6 +3,7 @@ package project.aqua_notes.Controllers.Entity_Controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,11 +30,13 @@ public class ReportController {
         this.reportService = reportService;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/")
     public ResponseEntity<List<ReportEntity>> getAll() {
         return ResponseEntity.status(201).body(reportService.getAll());
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     @PostMapping("/add")
     public ResponseEntity<ReportEntity> add(@RequestBody AddReportDTO report){
         ReportEntity saved = reportService.add(report);
