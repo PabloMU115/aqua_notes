@@ -1,7 +1,6 @@
 package project.aqua_notes.Services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -11,6 +10,7 @@ import project.aqua_notes.Entities.ReportEntity;
 import project.aqua_notes.Entities.UserEntity;
 import project.aqua_notes.Models.ReportDTOs.AddReportDTO;
 import project.aqua_notes.Models.ReportDTOs.ModifyReportDTO;
+import project.aqua_notes.Repositories.AnonUserRepository;
 import project.aqua_notes.Repositories.PostRepository;
 import project.aqua_notes.Repositories.ReportRepository;
 import project.aqua_notes.Repositories.UserRepository;
@@ -20,11 +20,13 @@ public class ReportService {
     private final ReportRepository repo;
     private final UserRepository userRepo;
     private final PostRepository postRepo;
+    private final AnonUserRepository anonRepo;
 
-    public ReportService(ReportRepository repo, UserRepository userRepo, PostRepository postRepo){
+    public ReportService(AnonUserRepository anonRepo, PostRepository postRepo, ReportRepository repo, UserRepository userRepo) {
+        this.anonRepo = anonRepo;
+        this.postRepo = postRepo;
         this.repo = repo;
         this.userRepo = userRepo;
-        this.postRepo = postRepo;
     }
 
     public List<ReportEntity> getAll(){
@@ -37,7 +39,6 @@ public class ReportService {
 
     public ReportEntity add(AddReportDTO incomingReport){
         ReportEntity newReport = new ReportEntity();
-        Optional<UserEntity> newUser = userRepo.findById(incomingReport.getUserId());
         PostEntity newPost = new PostEntity();
 
         newReport.setReportType(incomingReport.getReportType());
@@ -45,14 +46,16 @@ public class ReportService {
         newReport.setReportDescription(incomingReport.getReportDescription());
         newReport.setCoordinates(incomingReport.getCoordinates());
         
-        if (newUser.isPresent()) {
-            newReport.setUser(newUser.orElseThrow());
+        if (incomingReport.getUserId() != null) {
+            UserEntity newUser = userRepo.findById(incomingReport.getUserId()).orElseThrow();
+            newReport.setUser(newUser);
         }
         else{
             AnonUserEntity newAnon = new AnonUserEntity();
             newAnon.setAnonUserId(incomingReport.getAnonUserId());
             newAnon.setName(incomingReport.getAnonUserName());
             newReport.setAnonUser(newAnon);
+            anonRepo.save(newAnon);
         }
 
         newPost.setReport(newReport);
