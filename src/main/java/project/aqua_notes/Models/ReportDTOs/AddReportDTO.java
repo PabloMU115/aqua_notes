@@ -6,6 +6,8 @@ public class AddReportDTO {
     private String reportDescription;
     private String coordinates;
     private Long userId;
+    private Long anonUserId;
+    private String anonUserName;
 
     public int getReportType() {
         return reportType;
@@ -47,5 +49,21 @@ public class AddReportDTO {
         this.coordinates = coordinates;
     }
 
+    public Long getAnonUserId() {
+        return anonUserId;
+    }
 
+    public void setAnonUserId(Long anonUserId) {
+        this.anonUserId = anonUserId;
+    }
+
+    public String getAnonUserName() {
+        return anonUserName;
+    }
+
+    public void setAnonUserName(String anonUserName) {
+        this.anonUserName = anonUserName;
+    }
+
+    
 }

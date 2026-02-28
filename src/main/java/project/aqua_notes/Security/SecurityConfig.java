@@ -36,15 +36,15 @@ public class SecurityConfig {
         .httpBasic(AbstractHttpConfigurer::disable)
         .formLogin(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers(
-              "/api/auth/**",
-              "/api/comments/**"
-            ).permitAll()
-            .anyRequest().authenticated()
+            // .requestMatchers(
+            //   "/api/auth/**",
+            //   "/api/comments/**"
+            // ).permitAll()
+            .anyRequest().permitAll()
         )
-        .oauth2ResourceServer(oauth2 -> oauth2
-            .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter()))
-        )
+        // .oauth2ResourceServer(oauth2 -> oauth2
+        //     .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter()))
+        // )
         .build();
   }
 
@@ -66,9 +66,8 @@ public class SecurityConfig {
   }
 
   private JwtAuthenticationConverter jwtAuthConverter() {
-    // Si guardás roles en claim "roles", los convertimos a Authorities
     JwtGrantedAuthoritiesConverter gac = new JwtGrantedAuthoritiesConverter();
-    gac.setAuthorityPrefix("");     // porque ya vamos a guardar "ROLE_USER"
+    gac.setAuthorityPrefix("");
     gac.setAuthoritiesClaimName("roles");
 
     JwtAuthenticationConverter converter = new JwtAuthenticationConverter();

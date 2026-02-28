@@ -53,6 +53,10 @@ public class ReportEntity {
     private Instant createdAt = Instant.now();
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name = "anon_user_id")
+    private AnonUserEntity anonUser;
 }

@@ -1,9 +1,11 @@
 package project.aqua_notes.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import project.aqua_notes.Entities.AnonUserEntity;
 import project.aqua_notes.Entities.PostEntity;
 import project.aqua_notes.Entities.ReportEntity;
 import project.aqua_notes.Entities.UserEntity;
@@ -35,14 +37,23 @@ public class ReportService {
 
     public ReportEntity add(AddReportDTO incomingReport){
         ReportEntity newReport = new ReportEntity();
-        UserEntity newUser = userRepo.findById(incomingReport.getUserId()).orElseThrow();
+        Optional<UserEntity> newUser = userRepo.findById(incomingReport.getUserId());
         PostEntity newPost = new PostEntity();
 
         newReport.setReportType(incomingReport.getReportType());
         newReport.setReportTown(incomingReport.getReportTown());
         newReport.setReportDescription(incomingReport.getReportDescription());
         newReport.setCoordinates(incomingReport.getCoordinates());
-        newReport.setUser(newUser);
+        
+        if (newUser.isPresent()) {
+            newReport.setUser(newUser.orElseThrow());
+        }
+        else{
+            AnonUserEntity newAnon = new AnonUserEntity();
+            newAnon.setAnonUserId(incomingReport.getAnonUserId());
+            newAnon.setName(incomingReport.getAnonUserName());
+            newReport.setAnonUser(newAnon);
+        }
 
         newPost.setReport(newReport);
 
