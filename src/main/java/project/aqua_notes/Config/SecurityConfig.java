@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -11,31 +13,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    //Users
-                    "/api/users/**",
-                    // "/api/users/add",
-                    // "/api/users/getById/**",
-                    // "/api/users/modifyInfo/**",
-                    // "/api/users/modifyMail/**",
-                    // "/api/users/modifyPassword/**",
-                    // "/api/users/delete/**",
-                    //Reports
-                    "/api/reports/**",
-                    //Reactions
-                    "/api/reactions/**",
-                    //Comments
-                    "/api/comments/**",
-                    //Notifications
-                    "/api/notifications/**"
-                    
-                ).permitAll()
-                .anyRequest().authenticated()
-            );
-
-        return http.build();
+  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http
+        .csrf(AbstractHttpConfigurer::disable)
+        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .httpBasic(AbstractHttpConfigurer::disable)
+        .formLogin(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(auth -> auth
+            // .requestMatchers(
+            //   "/api/auth/**",
+            //   "/api/comments/**"
+            // ).permitAll()
+            .anyRequest().permitAll()
+        )
+        // .oauth2ResourceServer(oauth2 -> oauth2
+        //     .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter()))
+        // )
+        .build();
     }
 }
