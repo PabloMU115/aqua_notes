@@ -2,6 +2,8 @@ package project.aqua_notes.Services;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import project.aqua_notes.Entities.AnonUserEntity;
@@ -37,7 +39,7 @@ public class ReportService {
         return repo.findById(id).orElseThrow();
     }
 
-    public ReportEntity add(AddReportDTO incomingReport){
+    public ResponseEntity<Void> add(AddReportDTO incomingReport){
         ReportEntity newReport = new ReportEntity();
         PostEntity newPost = new PostEntity();
 
@@ -62,7 +64,7 @@ public class ReportService {
 
         repo.save(newReport);
         postRepo.save(newPost);
-        return newReport;
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     public ReportEntity modify(Long id, ModifyReportDTO dto){

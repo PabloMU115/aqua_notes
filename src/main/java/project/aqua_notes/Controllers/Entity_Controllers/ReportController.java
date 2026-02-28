@@ -32,14 +32,14 @@ public class ReportController {
     // @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/")
     public ResponseEntity<List<ReportEntity>> getAll() {
-        return ResponseEntity.status(201).body(reportService.getAll());
+        return ResponseEntity.status(200).body(reportService.getAll());
     }
 
     // @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     @PostMapping("/add")
-    public ResponseEntity<ReportEntity> add(@RequestBody AddReportDTO report){
-        ReportEntity saved = reportService.add(report);
-        return ResponseEntity.status(201).body(saved);
+    public ResponseEntity<Void> add(@RequestBody AddReportDTO report){
+        ResponseEntity<Void> saved = reportService.add(report);
+        return saved;
     }
 
     @PutMapping("/modify/{id}")
