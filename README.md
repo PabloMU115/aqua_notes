@@ -8,14 +8,14 @@ Backend system developed with Java and Spring Boot for reporting and tracking wa
 * Retrieval of reports for map visualization
 * REST API for managing incidents
 * Data validation and persistence
-* User-associated reporting (if aplica)
+* User-associated reporting
 
 ## 🛠️ Tech Stack
 
 * **Backend:** Spring Boot (Java)
 * **Database:** MySQL
 * **API:** RESTful services
-* **Tools:** Maven / Gradle (ajusta según tu proyecto)
+* **Tools:** Maven
 
 ## 🧠 Architecture
 
